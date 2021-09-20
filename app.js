@@ -22,7 +22,7 @@ mongoose.connect(process.env.DATABASE,
 
 //middleware
 app.use(bodyParser.json());
-app.use(cookieParser())
+app.use(cookieParser()) //helps to add or delete some value to cookies...
 app.use(cors())
 
 //My Routes

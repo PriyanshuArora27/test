@@ -13,7 +13,7 @@ const ProductCartSchema= new Schema({
     price:Number
 });
 
-const ProductCart = mongoose.model("ProductCart",ProductCartSchema);
+export const ProductCart = mongoose.model("ProductCart",ProductCartSchema);
 
 const OrderSchema = new Schema({
     products:[ProductCartSchema],
@@ -27,6 +27,5 @@ const OrderSchema = new Schema({
     }
 },{timestamps:true})
 
-const Order = mongoose.model("Order",OrderSchema);
+export const Order = mongoose.model("Order",OrderSchema);
 
-module.exports={Order,ProductCart};

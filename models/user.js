@@ -5,12 +5,12 @@ import pkg from 'uuid';
 const { v4: uuidv4 } = pkg;
 
 const userSchema=new Schema({
-    name:{
-        type:String,
-        reqired: true,
-        maxlength:32,
-        trim:true
-    },
+    name: {
+        type: String,
+        required: true,
+        maxlength: 32,
+        trim: true
+    },    
     lastname:{
         type:String,
         maxlength:32,
@@ -30,7 +30,7 @@ const userSchema=new Schema({
         type:String,
         required:true,
     },
-    salt:String,
+    salt: String,
     role:{
         type:Number,
         default:0,
@@ -55,26 +55,24 @@ userSchema.virtual("password")
 
 userSchema.methods={
     
-    authenticate:function(){
+    authenticate:function(plainpassword){
         return this.securePassword(plainpassword)===this.encry_password
     },
 
     securePassword:function(plainpassword){
         if(!plainpassword) return"";
         try {
-            return crypto
-            .createHmac('sha256', this.salt)
+            return createHmac('sha256',this.salt)
             .update(plainpassword)
             .digest('hex');
             
         } catch (err) {
-            
+            return ""
         }
     }
 }
 
-//module.exports =  mongoose.model("User", userSchema )
-//export default userSchema;
-const User = userSchema;
+const User =  mongoose.model("User", userSchema )
+
 export default User;
 
